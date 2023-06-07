@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Filter Options</title>
+    <style>
+        html, body {
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        form p {
+            margin-left:0;
+        }
+        button[type="submit"]{
+            font-size: 20px;
+            padding: 10px 20px;
+            margin-left: 0;
+            background-color: #007bff;
+            color: white;
+        }
+
+        form label, form select {
+            margin: 10px;
+        }
+
+        select {
+            width: 50vw;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="{% url 'filter_reviews' %}" method="post">
+        {% csrf_token %}
+
+        <p>Filter Reviews</p>
+        <!-- since priority of sorting is Text>Rating>Date then setting minimum rating -->
+        <label for="priority_text">Prioritize by text:</label>
+        <select id="priority_text" name="priority_text">
+            <option value=True>Yes</option>
+            <option value=False>No</option>
+        </select>
+
+        <label for="order_by_rating">Order by rating:</label>
+        <select id="order_by_rating" name="order_by_rating">
+            <option value=True>Highest First</option>
+            <option value=False>Lowest First</option>
+        </select>
+
+        <label for="order_by_date">Order by date:</label>
+        <select id="order_by_date" name="order_by_date">
+            <option value=False>Newest First</option>
+            <option value=True>Oldest First</option>
+        </select>
+
+        <label for="min_rating">Minimum rating:</label>
+        <select id="min_rating" name="min_rating">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+            <option value=4>4</option>
+            <option value=5>5</option>
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+</body>
+</html>

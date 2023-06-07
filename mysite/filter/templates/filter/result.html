@@ -1,0 +1,25 @@
+    {% if reviews %}
+        <table>
+            <thead>
+                <tr>
+                    <!-- wasn`t sure what data to show from the json, think this is sufficient -->
+                    <th>Rating</th>
+                    <th>Name</th>
+                    <th>Text</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in reviews %}
+                    <tr>
+                        <td>{{ review.rating }}</td>
+                        <td>{{ review.reviewerName }}</td>
+                        <td>{{ review.reviewText }}</td>
+                        <td>{{ review.reviewCreatedOnDate }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No reviews available.</p>
+    {% endif %}

@@ -37,8 +37,8 @@ def sorting_json(priority_text, order_by_rating,order_by_date, min_rating):
     # divided the text and no text for an easier time
     if priority_text == False:
         filtered_reviews = filtered_reviews_text + filtered_reviews_no_text
-        filtered_reviews.sort(key=lambda r: ( r['reviewCreatedOnTime']), reverse=order_by_rating)
-        filtered_reviews.sort(key=lambda r: r['rating'], reverse=order_by_date)
+        filtered_reviews.sort(key=lambda r: ( r['reviewCreatedOnTime']), reverse=order_by_date)
+        filtered_reviews.sort(key=lambda r: r['rating'], reverse=order_by_rating)
         return filtered_reviews
     else:
         filtered_reviews_text.sort(key=lambda r: r['reviewCreatedOnTime'], reverse=order_by_date)

@@ -8,9 +8,9 @@ def form(request):
 
 
 def filter_reviews(request):
-    priority_text = request.POST.get('priority_text')
-    order_by_rating = request.POST.get('order_by_rating')
-    order_by_date = request.POST.get('order_by_date')
+    priority_text = request.POST.get('priority_text') == "True"
+    order_by_rating = request.POST.get('order_by_rating') == "True"
+    order_by_date = request.POST.get('order_by_date') == "True"
     min_rating = int(request.POST.get('min_rating'))
 
     filtered_reviews = sorting_json(priority_text, order_by_rating, order_by_date, min_rating)
@@ -32,9 +32,6 @@ def sorting_json(priority_text, order_by_rating,order_by_date, min_rating):
             else:
                 filtered_reviews_no_text.append(review)
 
-    order_by_rating = order_by_rating == "True"
-    order_by_date = order_by_date == "True"
-    priority_text = priority_text == "True"
 
     print(type(priority_text), type(order_by_rating), type(order_by_date), min_rating)
     # divided the text and no text for an easier time

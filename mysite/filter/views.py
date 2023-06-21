@@ -27,25 +27,16 @@ def sorting_json(priority_text, order_by_rating,order_by_date, min_rating):
     for review in reviews_data:
         rating = review["rating"]
         if rating >= int(min_rating):
-            if len(review['reviewText']) > 0:
+            if len(review['reviewText']) > 0 and priority_text == True:
                 filtered_reviews_text.append(review)
             else:
                 filtered_reviews_no_text.append(review)
 
-
-    print(type(priority_text), type(order_by_rating), type(order_by_date), min_rating)
     # divided the text and no text for an easier time
-    if priority_text == False:
-        filtered_reviews = filtered_reviews_text + filtered_reviews_no_text
-        filtered_reviews.sort(key=lambda r: ( r['reviewCreatedOnTime']), reverse=order_by_date)
-        filtered_reviews.sort(key=lambda r: r['rating'], reverse=order_by_rating)
-        return filtered_reviews
-    else:
-        filtered_reviews_text.sort(key=lambda r: r['reviewCreatedOnTime'], reverse=order_by_date)
-        filtered_reviews_text.sort(key=lambda r: r['rating'], reverse=order_by_rating)
-        filtered_reviews_no_text.sort(key=lambda r: r['reviewCreatedOnTime'], reverse=order_by_date)
-        filtered_reviews_no_text.sort(key=lambda r: r['rating'], reverse=order_by_rating)
-        filtered_reviews = filtered_reviews_text + filtered_reviews_no_text
+    return sorthandler(filtered_reviews_text, order_by_date, order_by_rating) + sorthandler(filtered_reviews_no_text, order_by_date, order_by_rating)
 
-        return filtered_reviews
+def sorthandler(list_to_sort, order_by_date, order_by_rating ):
+    list_to_sort.sort(key=lambda r: (r['reviewCreatedOnTime']), reverse=order_by_date)
+    list_to_sort.sort(key=lambda r: r['rating'], reverse=order_by_rating)
+    return list_to_sort
 
